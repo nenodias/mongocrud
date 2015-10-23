@@ -1,0 +1,7 @@
+Django==1.8.2
+djangorestframework==3.0.4
+mongoengine==0.9.0
+django-rest-framework-mongoengine==2.0.2
+pymongo==2.8.0
+Markdown==2.6.2
+django-filter==0.10.0
