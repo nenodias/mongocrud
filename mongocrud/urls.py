@@ -9,5 +9,5 @@ from api.urls import router
 urlpatterns = [
     url(r'^api/token/', obtain_auth_token, name='api-token'),
     url(r'^api/', include(router.urls) ),
-    url(r'^$',TemplateView.as_view(template_name='api/index.html'))
+    url(r'^$|^(?P<single>[\w-]+)$',TemplateView.as_view(template_name='api/index.html'))
 ]
