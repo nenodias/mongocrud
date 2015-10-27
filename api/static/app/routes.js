@@ -12,6 +12,11 @@ app.config( ['$routeProvider','$locationProvider', function($routeProvider, $loc
        controller     : 'HomeCtrl',
     })
 
+    .when('/login', {
+       templateUrl : 'static/app/views/login.html',
+       controller     : 'LoginCtrl',
+    })
+
     .when('/sobre', {
        templateUrl : 'static/app/views/sobre.html',
        controller  : 'SobreCtrl',
