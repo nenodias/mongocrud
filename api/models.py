@@ -1,4 +1,8 @@
 # *-* coding:utf8 *-*
+import json, hashlib
+import datetime
+from django.conf import settings
+
 import mongoengine, datetime
 from mongoengine import *
 
@@ -23,6 +27,7 @@ class Usuario(Document):
     nome = StringField(required=True, max_length=200)
     email = StringField(required=True, max_length=200)
     senha = StringField(required=True, max_length=200)
+    salt = StringField(max_length=200)
     token = StringField(required=False, max_length=200)
     disciplinas = ListField(ReferenceField(Disciplina, reverse_delete_rule=CASCADE, required=False, null=True ))
 
@@ -31,10 +36,18 @@ class Usuario(Document):
 
     def authenticate(self, login, password):
         if login and password:
+            secret = str.encode(settings.SECRET_KEY)
             if not isinstance(password, bytes):
-                password = str.decode(password)
-            password_hash = hashlib.sha256(password)
-            return self.email == login and self.senha  == password_hash.hexdigest()
+                password = str.encode(password)
+            salt = str.encode(self.salt)
+            password_hash = hashlib.sha256(secret+ salt + password)
+            resultado = self.email == login and self.senha  == password_hash.hexdigest()
+            if resultado:
+                timestamp = str.encode( str( datetime.datetime.now().timestamp() ) )
+                token = str( hashlib.sha256(secret+ timestamp ).hexdigest() )
+                self.token = token
+                self.save()
+            return resultado
         return False
 
 class EntregaTrabalho(Document):
