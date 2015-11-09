@@ -48,6 +48,9 @@ DATABASES = {
     }
 }
 
+import logging
+logging.basicConfig(filename='server.log',format='%(levelname)s:%(asctime)s:%(message)s', level=logging.DEBUG)
+
 from mongoengine import *
 connect('djantex')
 

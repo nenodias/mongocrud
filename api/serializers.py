@@ -4,4 +4,5 @@ from .models import Usuario
 class UsuarioSerializer(DocumentSerializer):
     class Meta:
         model = Usuario
-        fields = ('id', 'nome', 'email', 'senha', 'disciplinas')
+        write_only = ('senha',)
+        fields = ('id', 'nome', 'email', 'disciplinas',)

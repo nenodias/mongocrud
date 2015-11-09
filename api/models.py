@@ -1,6 +1,8 @@
 # *-* coding:utf8 *-*
-import json, hashlib
 import datetime
+import hashlib
+import json
+import logging
 from django.conf import settings
 
 import mongoengine, datetime
@@ -39,8 +41,11 @@ class Usuario(Document):
             secret = str.encode(settings.SECRET_KEY)
             if not isinstance(password, bytes):
                 password = str.encode(password)
+            if not self.salt:
+                logging.error("Usuario com id: %s não possui salt" %(self.id) )
             salt = str.encode(self.salt)
             password_hash = hashlib.sha256(secret+ salt + password)
+
             resultado = self.email == login and self.senha  == password_hash.hexdigest()
             if resultado:
                 timestamp = str.encode( str( datetime.datetime.now().timestamp() ) )

@@ -1,3 +1,4 @@
+import logging
 import hashlib
 from .models import Usuario
 from rest_framework import authentication
@@ -16,7 +17,7 @@ class MyAuthentication(authentication.BaseAuthentication):
         return (user, None)
 
     def authenticate_credentials(self, userid, password):
-        print('Metodo Authenticate Credentials')
+        logging.debug("'Metodo Authenticate Credentials'")
         user = Usuario.objects.get(email=login)
         if user is None or not user.is_active or user.authenticate(login, password):
             raise exceptions.AuthenticationFailed('Invalid username/password')
@@ -25,7 +26,7 @@ class MyAuthentication(authentication.BaseAuthentication):
         return (user, None)
 
     def authenticate_header(self, request):
-        print('Metodo Authenticate Header')
+        logging.debug("'Metodo Authenticate Header'")
         pass
 
 class MyPermission(object):
