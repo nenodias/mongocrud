@@ -3,10 +3,9 @@ from rest_framework.permissions import AllowAny
 from .authentication import MyAuthentication, MyPermission
 
 class PaginateMixin(object):
-    def __init__(self, *args, **kwargs):
-        self.paginated_by = 25
-        self.paginated_by_param = 'page_size'
-        self.max_paginate_by = 100
+    paginate_by = 10
+    paginate_by_param = 'page_size'
+    max_paginate_by = 100
 
 class DefaultMixin(PaginateMixin):
     '''Configurações default para autenticação, permissões, filtragem e paginação da view '''
