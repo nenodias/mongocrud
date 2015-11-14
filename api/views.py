@@ -1,6 +1,4 @@
-import django_filters
 from rest_framework_mongoengine.viewsets import ModelViewSet
-from rest_framework import filters
 from .mixins import DefaultMixin, LoginMixin
 from .serializers import *
 from .models import *
@@ -11,6 +9,7 @@ class UsuarioViewSet(DefaultMixin, ModelViewSet):
 
     def get_queryset(self):
         queryset = Usuario.objects.all()
+        queryset = queryset.order_by('-id')
         if self.request.GET.get('email'):
             queryset = queryset.filter(email=self.request.GET['email'])
         if self.request.GET.get('nome'):

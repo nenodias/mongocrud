@@ -1,4 +1,4 @@
-app.controller('HomeCtrl', function ($rootScope, $scope,$location, UsuarioEntry) {
+app.controller('HomeController', function ($rootScope, $scope,$location, UsuarioEntry) {
     $rootScope.location_path = $location.path();
     if( $rootScope.loggged != true){
       $location.path('/login');
@@ -27,7 +27,7 @@ app.controller('HomeCtrl', function ($rootScope, $scope,$location, UsuarioEntry)
     */
 });
 
-app.controller('LoginCtrl', function ($rootScope, $scope,$location, LoginService) {
+app.controller('LoginController', function ($rootScope, $scope,$location, LoginService) {
     $rootScope.location_path = $location.path();
     $scope.email = "";
     $scope.senha = "";
@@ -37,12 +37,12 @@ app.controller('LoginCtrl', function ($rootScope, $scope,$location, LoginService
 });
 
 
-app.controller('SobreCtrl', function($rootScope, $location)
+app.controller('SobreController', function($rootScope, $location)
 {
    $rootScope.location_path = $location.path();
 });
 
-app.controller('ContatoCtrl', function($rootScope, $location)
+app.controller('ContatoController', function($rootScope, $location)
 {
    $rootScope.location_path = $location.path();
 });

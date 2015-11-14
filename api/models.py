@@ -33,6 +33,27 @@ class Usuario(Document):
     token = StringField(required=False, max_length=200)
     disciplinas = ListField(ReferenceField(Disciplina, reverse_delete_rule=CASCADE, required=False, null=True ))
 
+    def _criptografar_senha(self):
+        secret = str.encode(settings.SECRET_KEY)
+        if not isinstance(self.senha, bytes):
+            password = str.encode(self.senha)
+        if not self.salt:
+            timestamp = str.encode( str( datetime.datetime.now().timestamp() ) )
+            self.salt = str( hashlib.sha256(secret+ timestamp ).hexdigest() )
+        salt = str.encode(self.salt)
+        password_hash = hashlib.sha256(secret+ salt + password)
+        self.senha = str( password_hash.hexdigest() )
+
+    def clean(self):
+        insert = True if self.pk == None else False
+
+        if insert:
+            email = self.email
+            usuario = Usuario.objects(email=email)
+            if usuario:
+                raise ValueError('Email já cadastrado!')
+        return True
+
     def is_authenticated(self):
         return self.is_authenticated
 

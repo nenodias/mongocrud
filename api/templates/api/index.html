@@ -11,10 +11,13 @@
         <meta name="description" content="Aplicação MongoDB" >
         <meta name="author" content="Horácio Dias">
 
-        <link rel="stylesheet" href="static/css/normalize.css">
-        <link rel="stylesheet" href="static/css/skeleton.css">
-
         <script type="text/javascript" src="static/js/jquery-2.1.4/jquery-2.1.4.min.js"></script>
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+
 
         <script type="text/javascript" src="static/js/angular-1.4.7/angular.js"></script>
         <script type="text/javascript" src="static/js/angular-1.4.7/angular-loader.js"></script>
@@ -24,8 +27,8 @@
         <script type="text/javascript" src="static/js/angular-1.4.7/angular-cookies.js"></script>
     </head>
     <body>
-        <div class="container">
-            <div class="row" ng-show="loggged">
+        <div class="container" ng-view>
+            <div class="row" ng-if="loggged">
                 <div class="one-half column">
                     <a ng-class="{ 'button-primary' : location_path == '/'}" class="button"  href="home">Home</a>
                     <a ng-class="{ 'button-primary' : location_path == '/sobre'}" class="button"  href="sobre">Sobre</a>
@@ -33,7 +36,6 @@
                 </div>
             </div>
 
-            <div ng-view></div>
         </div>
         <script src="static/app/app.js"></script>
         <script src="static/app/routes.js"></script>

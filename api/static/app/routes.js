@@ -6,10 +6,9 @@ app.config( ['$routeProvider','$locationProvider', function($routeProvider, $loc
     });
 
     $routeProvider
-
     .when('/', {
        templateUrl : 'static/app/views/home.html',
-       controller     : 'HomeCtrl',
+       controller     : 'HomeController',
        access: {
          required: true
        }
@@ -17,7 +16,7 @@ app.config( ['$routeProvider','$locationProvider', function($routeProvider, $loc
 
     .when('/login', {
        templateUrl : 'static/app/views/login.html',
-       controller     : 'LoginCtrl',
+       controller     : 'LoginController',
        access: {
          required: false
        }
@@ -25,7 +24,7 @@ app.config( ['$routeProvider','$locationProvider', function($routeProvider, $loc
 
     .when('/sobre', {
        templateUrl : 'static/app/views/sobre.html',
-       controller  : 'SobreCtrl',
+       controller  : 'SobreController',
        access: {
          required: true
        }
@@ -33,7 +32,7 @@ app.config( ['$routeProvider','$locationProvider', function($routeProvider, $loc
 
     .when('/contato', {
        templateUrl : 'static/app/views/contato.html',
-       controller  : 'ContatoCtrl',
+       controller  : 'ContatoController',
        access: {
          required: true
        }

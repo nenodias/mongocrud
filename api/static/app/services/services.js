@@ -14,6 +14,8 @@ app.factory('LoginService', ['$rootScope', '$cookieStore', '$location', '$http' 
         }
       };
       $cookieStore.put('globals', $rootScope.globals);
+      $location.path('/home');
+      console.log("Foi pra home");
     }, function errorCallback(response) {
       //FAULT
       $rootScope.globals = {};
