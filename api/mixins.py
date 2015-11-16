@@ -2,15 +2,9 @@ from rest_framework.authentication import BasicAuthentication
 from rest_framework.permissions import AllowAny
 from .authentication import MyAuthentication, MyPermission
 
-class PaginateMixin(object):
-    paginate_by = 10
-    paginate_by_param = 'page_size'
-    max_paginate_by = 100
-
-class DefaultMixin(PaginateMixin):
+class DefaultMixin():
     '''Configurações default para autenticação, permissões, filtragem e paginação da view '''
     def __init__(self, *args, **kwargs):
-        super(PaginateMixin, self).__init__(*args, **kwargs)
         self.authentication_classes = [
             BasicAuthentication,
         ]
@@ -31,9 +25,8 @@ class DefaultMixin(PaginateMixin):
         pass
 '''
 
-class LoginMixin(PaginateMixin):
+class LoginMixin():
     def __init__(self, *args, **kwargs):
-        super(PaginateMixin, self).__init__(*args, **kwargs)
         self.authentication_classes = [
             MyAuthentication,
         ]

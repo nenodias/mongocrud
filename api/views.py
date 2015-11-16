@@ -14,4 +14,15 @@ class UsuarioViewSet(DefaultMixin, ModelViewSet):
             queryset = queryset.filter(email=self.request.GET['email'])
         if self.request.GET.get('nome'):
             queryset = queryset.filter(nome=self.request.GET['nome'])
+        if self.request.GET.get('limit') and self.request.GET.get('offset'):
+            limit = int(self.request.GET.get('limit'))
+            offset = int(self.request.GET.get('offset'))
+            limit += offset
+            return queryset[offset:limit]
+        if self.request.GET.get('limit'):
+            limit = int(self.request.GET.get('limit'))
+            return queryset[:limit]
+        if self.request.GET.get('offset'):
+            offset = int(self.request.GET.get('offset'))
+            return queryset[offset:]
         return queryset
