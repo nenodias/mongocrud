@@ -6,6 +6,12 @@ app.factory('LoginService', ['$rootScope', '$cookieStore', '$location', '$http',
 function($rootScope, $cookieStore, $location, $http, $route) {
     var servico = {};
 
+    servico.logoff = function(){
+      $rootScope.globals = {};
+      $cookieStore.remove('globals');
+      $rootScope.logged = false;
+    };
+
     servico.logon = function(email, senha){
       $http.post('/logon/',{"email":email, "senha":senha})
       .then(function successCallback(response) {
@@ -18,17 +24,19 @@ function($rootScope, $cookieStore, $location, $http, $route) {
           $location.path('/home');
       }, function errorCallback(response) {
           //FAULT
-          $rootScope.globals = {};
-          $cookieStore.remove('globals');
+          servico.logoff();
       });
     };
 
-     servico.permissao = function($scope){
-         $scope.location_path = $location.path();
+     servico.permissao = function(){
+         $rootScope.location_path = $location.path();
          var acesso = false;
          $rootScope.logged = false;
          try{
-             acesso = $route.current.acesso.requerido;
+           if ($cookieStore.get('globals') !== undefined && $cookieStore.get('globals').currentUser !== undefined){
+             $rootScope.globals = $cookieStore.get('globals');
+           }
+           acesso = $route.current.acesso.requerido;
          }catch(exx){}
          if ( $rootScope.globals !== undefined && $rootScope.globals.currentUser !== undefined ){
              $rootScope.logged = true;
