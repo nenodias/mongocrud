@@ -9,46 +9,31 @@ app.config( ['$routeProvider','$locationProvider', function($routeProvider, $loc
     .when('/', {
        templateUrl : 'static/app/views/home.html',
        controller     : 'HomeController',
-       access: {
-         required: true
+       acesso: {
+         requerido: true
        }
     })
 
     .when('/login', {
        templateUrl : 'static/app/views/login.html',
-       controller     : 'LoginController',
-       access: {
-         required: false
-       }
+       controller     : 'LoginController'
     })
 
     .when('/sobre', {
        templateUrl : 'static/app/views/sobre.html',
        controller  : 'SobreController',
-       access: {
-         required: true
+       acesso: {
+         requerido: true
        }
     })
 
     .when('/contato', {
        templateUrl : 'static/app/views/contato.html',
        controller  : 'ContatoController',
-       access: {
-         required: true
+       acesso: {
+         requerido: true
        }
     })
 
     .otherwise ({ redirectTo: '/' });
-}]);
-
-app.run(['$rootScope', '$location', '$cookieStore', '$http', function ($rootScope, $location, $cookieStore, $http) {
-    $rootScope.globals = $cookieStore.get('globals') || {};
-    console.log($rootScope.globals);
-
-    $rootScope.$on('$locationChangeStart', function (event, next, current) {
-        if ($location.path() !== '/login' && !$rootScope.globals.currentUser) {
-            $location.path('/login');
-        }
-    });
-
 }]);

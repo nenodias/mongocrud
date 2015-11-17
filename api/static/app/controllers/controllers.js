@@ -1,13 +1,11 @@
-app.controller('HomeController', function ($rootScope, $scope,$location, UsuarioEntry) {
-    $rootScope.location_path = $location.path();
-    if( $rootScope.loggged != true){
-      $location.path('/login');
-    }
+app.controller('HomeController', function ( $rootScope, $scope, $location, UsuarioEntry, LoginService) {
+    LoginService.permissao($scope);
     /*
     var entry = UsuarioEntry.get({ id: $scope.id }, function() {
       console.log(entry);
     });
     */
+
     var entries = UsuarioEntry.query(function() {
       $scope.usuarios = entries;
       console.log(entries);
@@ -27,8 +25,8 @@ app.controller('HomeController', function ($rootScope, $scope,$location, Usuario
     */
 });
 
-app.controller('LoginController', function ($rootScope, $scope,$location, LoginService) {
-    $rootScope.location_path = $location.path();
+app.controller('LoginController', function ( $rootScope, $scope, $location, LoginService) {
+    LoginService.permissao($scope);
     $scope.email = "";
     $scope.senha = "";
     $scope.logon = function(){
@@ -37,12 +35,10 @@ app.controller('LoginController', function ($rootScope, $scope,$location, LoginS
 });
 
 
-app.controller('SobreController', function($rootScope, $location)
-{
-   $rootScope.location_path = $location.path();
+app.controller('SobreController', function( $rootScope, $scope, $location, LoginService){
+    LoginService.permissao($scope);
 });
 
-app.controller('ContatoController', function($rootScope, $location)
-{
-   $rootScope.location_path = $location.path();
+app.controller('ContatoController', function( $rootScope, $scope, $location, LoginService){
+    LoginService.permissao($scope);
 });
