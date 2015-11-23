@@ -7,9 +7,6 @@ app.config(function($interpolateProvider) {
     $interpolateProvider.endSymbol('}#');
 })
 
-
-
-
 .run(['LoginService','$rootScope', '$cookieStore', '$location', '$http', '$route',
    function (LoginService, $rootScope, $cookieStore, $location, $http, $route) {
       if( !LoginService.permissao() ){
