@@ -1,5 +1,4 @@
 app.controller('HomeController', function ( $rootScope, $scope, $location, UsuarioEntry, LoginService) {
-    LoginService.permissao();
     /*
     var entry = UsuarioEntry.get({ id: $scope.id }, function() {
       console.log(entry);
@@ -26,7 +25,6 @@ app.controller('HomeController', function ( $rootScope, $scope, $location, Usuar
 });
 
 app.controller('LoginController', function ( $rootScope, $scope, $location, LoginService) {
-    LoginService.permissao();
     $scope.email = "";
     $scope.senha = "";
     $scope.logon = function(){
@@ -36,9 +34,7 @@ app.controller('LoginController', function ( $rootScope, $scope, $location, Logi
 
 
 app.controller('SobreController', function( $rootScope, $scope, $location, LoginService){
-    LoginService.permissao();
 });
 
 app.controller('ContatoController', function( $rootScope, $scope, $location, LoginService){
-    LoginService.permissao();
 });

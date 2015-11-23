@@ -30,20 +30,21 @@ function($rootScope, $cookieStore, $location, $http, $route) {
 
      servico.permissao = function(){
          $rootScope.location_path = $location.path();
-         var acesso = false;
+         var permissao_necessaria = false;
          $rootScope.logged = false;
          try{
            if ($cookieStore.get('globals') !== undefined && $cookieStore.get('globals').currentUser !== undefined){
              $rootScope.globals = $cookieStore.get('globals');
            }
-           acesso = $route.current.acesso.requerido;
+           permissao_necessaria = $route.current.acesso.requerido;
          }catch(exx){}
          if ( $rootScope.globals !== undefined && $rootScope.globals.currentUser !== undefined ){
              $rootScope.logged = true;
              console.log("Ok  autenticacao");
-         }else if ( acesso ) {
-             $location.path('/login');
+             return true;
+         }else if ( permissao_necessaria ) {
              console.log("Falha de autenticacao");
+             return false;
          }
      };
      return servico;

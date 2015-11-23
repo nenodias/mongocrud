@@ -1,9 +1,21 @@
+'use strict';
+
 var app = angular.module('app',['ngRoute', 'ngResource', 'ngCookies']);
+
 app.config(function($interpolateProvider) {
     $interpolateProvider.startSymbol('#{');
     $interpolateProvider.endSymbol('}#');
-});
+})
 
+
+
+
+.run(['LoginService','$rootScope', '$cookieStore', '$location', '$http', '$route',
+   function (LoginService, $rootScope, $cookieStore, $location, $http, $route) {
+      if( !LoginService.permissao() ){
+         $location.path('/login');
+      }
+   }]);
 
 /*
 
