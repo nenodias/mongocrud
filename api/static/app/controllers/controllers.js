@@ -5,7 +5,9 @@ app.controller('HomeController', function ( $rootScope, $scope, $location, Usuar
     });
     */
 
-    var entries = UsuarioEntry.query(function() {
+    //var entries = UsuarioEntry.query({limit:2,offset:2},function() {//Filtrando e passanfo limite e offset, desde que os parâmetros estejam setados no resource
+
+    var entries = UsuarioEntry.query({limit:2,offset:2},function() {
       $scope.usuarios = entries;
       console.log(entries);
     });

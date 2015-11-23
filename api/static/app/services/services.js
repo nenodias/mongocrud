@@ -1,5 +1,5 @@
 app.factory('UsuarioEntry', ['$resource', function($resource) {
-  return $resource('/api/usuarios/:id');
+  return $resource('/api/usuarios/:id?offset=:offset&limit=:limit');
 }]);
 
 app.factory('LoginService', ['$rootScope', '$cookieStore', '$location', '$http', '$route',
