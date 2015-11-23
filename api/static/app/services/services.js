@@ -21,6 +21,7 @@ function($rootScope, $cookieStore, $location, $http, $route) {
             }
           };
           $cookieStore.put('globals', $rootScope.globals);
+          $rootScope.logged = true;
           $location.path('/home');
       }, function errorCallback(response) {
           //FAULT
