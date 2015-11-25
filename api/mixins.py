@@ -16,7 +16,7 @@ class DefaultMixin():
     def list(request, *args, **kwargs):
         requisicao = args[0]
         if requisicao.GET and  'count' in requisicao.GET.keys():
-            count = len(request.queryset)
+            count = request.queryset.count()
             return JsonResponse({ "count": count })
         return super().list(request, args, kwargs)
 
