@@ -11,6 +11,21 @@ class DefaultMixin():
         self.permission_classes = (
             AllowAny,
         )
+
+    def get_queryset(self):
+        self.queryset = self.queryset.order_by('-id')
+        if self.request.GET.get('limit') and self.request.GET.get('offset'):
+            limit = int(self.request.GET.get('limit'))
+            offset = int(self.request.GET.get('offset'))
+            limit += offset
+            return self.queryset[offset:limit]
+        if self.request.GET.get('limit'):
+            limit = int(self.request.GET.get('limit'))
+            return self.queryset[:limit]
+        if self.request.GET.get('offset'):
+            offset = int(self.request.GET.get('offset'))
+            return self.queryset[offset:]
+        return self.queryset
 '''
     #Caso precise dispara alguma operacao antes da Criação, Atualização ou Exclusão
 
