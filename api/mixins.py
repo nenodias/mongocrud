@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from rest_framework.authentication import BasicAuthentication
 from rest_framework.permissions import AllowAny
 from .authentication import MyAuthentication, MyPermission
@@ -11,6 +12,13 @@ class DefaultMixin():
         self.permission_classes = (
             AllowAny,
         )
+
+    def list(request, *args, **kwargs):
+        requisicao = args[0]
+        if requisicao.GET and  'count' in requisicao.GET.keys():
+            count = len(request.queryset)
+            return JsonResponse({ "count": count })
+        return super().list(request, args, kwargs)
 
     def get_queryset(self):
         self.queryset = self.queryset.order_by('-id')
