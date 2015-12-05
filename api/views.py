@@ -5,7 +5,6 @@ from .models import *
 
 class UsuarioViewSet(DefaultMixin, ModelViewSet):
     serializer_class = UsuarioSerializer
-    #queryset = Usuario.objects.all()
 
     def __init__(self, *args, **kwargs):
         self.queryset = Usuario.objects.all()
@@ -17,3 +16,27 @@ class UsuarioViewSet(DefaultMixin, ModelViewSet):
         if self.request.GET.get('nome'):
             self.queryset = self.queryset.filter(nome=self.request.GET['nome'])
         return self.queryset
+
+class CursoViewSet(LoginMixin, ModelViewSet):
+    serializer_class = CursoSerializer
+
+    def __init__(self, *args, **kwargs):
+        self.queryset = Curso.objects.all()
+
+class TrabalhoViewSet(LoginMixin, ModelViewSet):
+    serializer_class = TrabalhoSerializer
+
+    def __init__(self, *args, **kwargs):
+        self.queryset = Trabalho.objects.all()
+
+class DisciplinaViewSet(LoginMixin, ModelViewSet):
+    serializer_class = DisciplinaSerializer
+
+    def __init__(self, *args, **kwargs):
+        self.queryset = Disciplina.objects.all()
+
+class EntregaTrabalhoViewSet(LoginMixin, ModelViewSet):
+    serializer_class = EntregaTrabalhoSerializer
+
+    def __init__(self, *args, **kwargs):
+        self.queryset = EntregaTrabalho.objects.all()

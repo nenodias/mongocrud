@@ -48,7 +48,7 @@ class DefaultMixin():
         pass
 '''
 
-class LoginMixin():
+class LoginMixin(DefaultMixin):
     def __init__(self, *args, **kwargs):
         self.authentication_classes = [
             MyAuthentication,

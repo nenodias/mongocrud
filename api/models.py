@@ -14,15 +14,17 @@ class Curso(Document):
 
 class Trabalho(Document):
     titulo = StringField(required=True, max_length=100)
+    descricao = StringField(required=False, max_length=5000)
     data_criacao = DateTimeField(default=datetime.datetime.now)
     data_entrega = DateTimeField(required=False, null=True)
+    anexo = BinaryField(required=False, max_bytes=52428800)
     trabalhos_entregues = ListField(GenericReferenceField(required=False, null=True))
 
 class Disciplina(Document):
     nome = StringField(max_length=120, required=True)
     curso = ReferenceField(Curso, reverse_delete_rule=CASCADE)
     ano = IntField()
-    professor = GenericReferenceField(required=False, null=True)
+    professor = ObjectIdField(required=False, null=True)
     trabalhos = ListField(ReferenceField(Trabalho, reverse_delete_rule=CASCADE, required=False, null=True))
 
 class Usuario(Document):
@@ -79,18 +81,4 @@ class Usuario(Document):
 class EntregaTrabalho(Document):
     aluno = ReferenceField(Usuario, reverse_delete_rule=CASCADE)
     data_entrega = DateTimeField(default=datetime.datetime.now)
-    arquivo = BinaryField()
-
-if __name__ == "__main__":
-    set_trace()
-    curso_sis = Curso(nome="Sistemas de Informação", nome_abreviado="SIS")
-    curso_sis.save()
-
-    v9 = Usuario(nome="Vanini", email="vanini@fgp.com.br", senha="123")
-    v9.save()
-
-    disciplina_estrutura2 = Disciplina(nome="Estrutura de Dados 2", curso=curso_sis, ano=2015, professor=v9)
-    disciplina_estrutura2.save()
-
-    aluno = Usuario(nome="Horácio Dias", email="horacio.dias92@gmail.com", senha="123",disciplinas = [ disciplina_estrutura2 ])
-    aluno.save()
+    arquivo = BinaryField(max_bytes=52428800)

@@ -1,5 +1,5 @@
-from rest_framework_mongoengine.serializers import DocumentSerializer
-from .models import Usuario
+from .core_serializers import DocumentSerializer
+from .models import Usuario, Curso, Trabalho, Disciplina, EntregaTrabalho
 
 class UsuarioSerializer(DocumentSerializer):
     class Meta:
@@ -26,3 +26,34 @@ class UsuarioSerializer(DocumentSerializer):
         updated_instance.save()
         return updated_instance
         '''
+
+class CursoSerializer(DocumentSerializer):
+    class Meta:
+        model = Curso
+        fields = ('id', 'nome', 'nome_abreviado',)
+        extra_kwargs = {
+                'id' : {'read_only': True}
+        }
+
+class TrabalhoSerializer(DocumentSerializer):
+    class Meta:
+        model = Trabalho
+        fields = ('id', 'titulo', 'descricao', 'data_criacao', 'data_entrega', 'anexo', 'trabalhos_entregues',)
+        extra_kwargs = {
+                'id' : {'read_only': True}
+        }
+class DisciplinaSerializer(DocumentSerializer):
+    class Meta:
+        model = Disciplina
+        fields = ('id', 'nome', 'curso', 'ano', 'professor', 'trabalhos',)
+        extra_kwargs = {
+                'id' : {'read_only': True}
+        }
+
+class EntregaTrabalhoSerializer(DocumentSerializer):
+    class Meta:
+        model = EntregaTrabalho
+        fields = ('id', 'aluno', 'data_entrega','arquivo',)
+        extra_kwargs = {
+                'id' : {'read_only': True}
+        }
