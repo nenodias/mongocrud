@@ -82,3 +82,4 @@ class EntregaTrabalho(Document):
     aluno = ReferenceField(Usuario, reverse_delete_rule=CASCADE)
     data_entrega = DateTimeField(default=datetime.datetime.now)
     arquivo = BinaryField(max_bytes=52428800)
+
