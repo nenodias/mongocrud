@@ -38,6 +38,7 @@ app.config( ['$routeProvider','$locationProvider', function($routeProvider, $loc
     .otherwise ({ redirectTo: '/' });
 }]);
 app.run(['$rootScope', '$location', 'LoginService', function ($rootScope, $location, LoginService) {
+    $rootScope.year = new Date().getFullYear();
     $rootScope.$on('$routeChangeStart', function(event, next, current) {
         if ( ( (next.acesso !== undefined  && next.acesso.requerido === true ) && !LoginService.permissao() ) ) {
             console.log('DENY');

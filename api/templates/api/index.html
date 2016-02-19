@@ -27,16 +27,33 @@
         <script type="text/javascript" src="static/js/angular-1.4.7/angular-cookies.js"></script>
     </head>
     <body>
+        <nav class="navbar navbar-fixed-top navbar-inverse" ng-if="logged">
+          <div class="container">
+            <div class="navbar-header">
+              <button aria-controls="navbar" aria-expanded="true" data-target="#navbar" data-toggle="collapse" class="navbar-toggle" type="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a href="#" class="navbar-brand">Djantex</a>
+            </div>
+            <div class="navbar-collapse collapse in" id="navbar" aria-expanded="true" style="">
+              <ul class="nav navbar-nav">
+                <li ng-class="{ 'button-primary' : location_path == '/'}" class="active"><a href="home">Home</a></li>
+                <li ng-class="{ 'button-primary' : location_path == '/sobre'}"><a href="sobre">Sobre</a></li>
+                <li ng-class="{ 'button-primary' : location_path == '/contato'}"><a href="contato">Contato</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <p>&nbsp;</p>
         <div class="container">
-            <div class="row" ng-if="logged">
-                <div class="one-half column">
-                    <a ng-class="{ 'button-primary' : location_path == '/'}" class="button"  href="home">Home</a>
-                    <a ng-class="{ 'button-primary' : location_path == '/sobre'}" class="button"  href="sobre">Sobre</a>
-                    <a ng-class="{ 'button-primary' : location_path == '/contato'}" class="button"  href="contato">Contato</a>
-                </div>
+            <div class="row row-right" ng-view>
             </div>
-            <div ng-view>
-            </div>
+            <footer>
+                <p>&copy; Horácio Dias #{ year }#</p>
+            </footer>
         </div>
         <script src="static/app/app.js"></script>
         <script src="static/app/routes.js"></script>
