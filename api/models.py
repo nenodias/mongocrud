@@ -35,6 +35,16 @@ class Usuario(Document):
     token = StringField(required=False, max_length=200)
     disciplinas = ListField(ReferenceField(Disciplina, reverse_delete_rule=CASCADE, required=False, null=True ))
 
+    ALUNO = "AL"
+    PROFESSOR = "PF"
+    ADMINISTRADOR = "ADM"
+    PERFILS = (
+            (ALUNO, 'Aluno'),
+            (PROFESSOR, 'Professor'),
+            (ADMINISTRADOR, 'Administrador')
+            )
+    perfil = StringField(choices=PERFILS, default=ALUNO )
+
     def _criptografar_senha(self):
         secret = str.encode(settings.SECRET_KEY)
         if not isinstance(self.senha, bytes):

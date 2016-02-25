@@ -1,19 +1,21 @@
 from django.http import JsonResponse
 from rest_framework.authentication import BasicAuthentication
 from rest_framework.permissions import AllowAny
-from .authentication import MyAuthentication, MyPermission
+from .authentication import MyAuthentication, MyPermission, MyBasicAuthentication, MyBasicPermission
 
 class DefaultMixin():
     '''Configurações default para autenticação, permissões, filtragem e paginação da view '''
     def __init__(self, *args, **kwargs):
         self.authentication_classes = [
-            BasicAuthentication,
+            MyBasicAuthentication,
         ]
         self.permission_classes = (
-            AllowAny,
+            MyBasicPermission,
         )
 
     def list(request, *args, **kwargs):
+        from pdb import set_trace
+        set_trace()
         requisicao = args[0]
         if requisicao.GET and  'count' in requisicao.GET.keys():
             count = request.get_queryset().count()
